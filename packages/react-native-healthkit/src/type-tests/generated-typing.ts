@@ -1,3 +1,8 @@
+import type { AnyMap } from 'react-native-nitro-modules'
+import type {
+  queryClinicalRecords,
+  queryDocumentSamples,
+} from '../healthkit.ios'
 import type {
   BloodGlucoseUnit,
   CategorySampleTyped,
@@ -5,7 +10,11 @@ import type {
   CategoryTypeIdentifierWriteable,
   CategoryValueForIdentifier,
   CategoryValueSleepAnalysis,
+  ClinicalRecord,
+  ClinicalTypeIdentifier,
   CorrelationSampleTyped,
+  DocumentSample,
+  DocumentTypeIdentifier,
   HeartRateMotionContext,
   Quantity,
   QuantitySampleTyped,
@@ -130,4 +139,30 @@ type _workoutEventMetadataIsTypedOnMetadata = Assert<
     NonNullable<WorkoutEventTyped['metadata']>['HKSwimmingStrokeStyle'],
     SwimmingStrokeStyle | undefined
   >
+>
+
+type _clinicalRecordIdentifierIsPresent = Assert<
+  'HKClinicalTypeIdentifierLabResultRecord' extends ClinicalTypeIdentifier
+    ? true
+    : false
+>
+
+type _clinicalRecordHasFHIRPayload = Assert<
+  Equal<ClinicalRecord['fhirResource'], AnyMap | undefined>
+>
+
+type _clinicalRecordQueryUsesClinicalIdentifiers = Assert<
+  Equal<Parameters<typeof queryClinicalRecords>[0], ClinicalTypeIdentifier>
+>
+
+type _documentRecordIdentifierIsPresent = Assert<
+  Equal<DocumentTypeIdentifier, 'HKDocumentTypeIdentifierCDA'>
+>
+
+type _documentRecordHasBase64Payload = Assert<
+  Equal<DocumentSample['documentData'], string | undefined>
+>
+
+type _documentSampleQueryUsesDocumentIdentifiers = Assert<
+  Equal<Parameters<typeof queryDocumentSamples>[0], DocumentTypeIdentifier>
 >
