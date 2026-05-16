@@ -18,7 +18,7 @@ public extension ClinicalRecord {
   /**
    * Create a new instance of `ClinicalRecord`.
    */
-  init(clinicalType: ClinicalTypeIdentifier, displayName: String, fhirRecord: AnyMap?, fhirResource: AnyMap?, sampleType: SampleType, startDate: Date, endDate: Date, hasUndeterminedDuration: Bool, metadata: AnyMap, uuid: String, sourceRevision: SourceRevision, device: Device?) {
+  init(clinicalType: ClinicalTypeIdentifier, displayName: String, fhirRecord: AnyMap?, fhirResource: AnyMap?, fhirResourceData: String?, fhirResourceIdentifier: String?, fhirResourceType: String?, fhirResourceSourceURL: String?, sampleType: SampleType, startDate: Date, endDate: Date, hasUndeterminedDuration: Bool, metadata: AnyMap, uuid: String, sourceRevision: SourceRevision, device: Device?) {
     self.init(clinicalType, std.string(displayName), { () -> bridge.std__optional_std__shared_ptr_AnyMap__ in
       if let __unwrappedValue = fhirRecord {
         return bridge.create_std__optional_std__shared_ptr_AnyMap__(__unwrappedValue.cppPart)
@@ -28,6 +28,30 @@ public extension ClinicalRecord {
     }(), { () -> bridge.std__optional_std__shared_ptr_AnyMap__ in
       if let __unwrappedValue = fhirResource {
         return bridge.create_std__optional_std__shared_ptr_AnyMap__(__unwrappedValue.cppPart)
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = fhirResourceData {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = fhirResourceIdentifier {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = fhirResourceType {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
+      } else {
+        return .init()
+      }
+    }(), { () -> bridge.std__optional_std__string_ in
+      if let __unwrappedValue = fhirResourceSourceURL {
+        return bridge.create_std__optional_std__string_(std.string(__unwrappedValue))
       } else {
         return .init()
       }
@@ -68,6 +92,54 @@ public extension ClinicalRecord {
       if bridge.has_value_std__optional_std__shared_ptr_AnyMap__(self.__fhirResource) {
         let __unwrapped = bridge.get_std__optional_std__shared_ptr_AnyMap__(self.__fhirResource)
         return AnyMap(withCppPart: __unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var fhirResourceData: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__fhirResourceData) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__fhirResourceData)
+        return String(__unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var fhirResourceIdentifier: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__fhirResourceIdentifier) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__fhirResourceIdentifier)
+        return String(__unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var fhirResourceType: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__fhirResourceType) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__fhirResourceType)
+        return String(__unwrapped)
+      } else {
+        return nil
+      }
+    }()
+  }
+  
+  @inline(__always)
+  var fhirResourceSourceURL: String? {
+    return { () -> String? in
+      if bridge.has_value_std__optional_std__string_(self.__fhirResourceSourceURL) {
+        let __unwrapped = bridge.get_std__optional_std__string_(self.__fhirResourceSourceURL)
+        return String(__unwrapped)
       } else {
         return nil
       }

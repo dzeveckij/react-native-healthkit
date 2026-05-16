@@ -18,4 +18,8 @@ export interface ClinicalRecord extends BaseSample {
   readonly displayName: string
   readonly fhirRecord?: AnyMap
   readonly fhirResource?: AnyMap
+  readonly fhirResourceData?: string
+  readonly fhirResourceIdentifier?: string
+  readonly fhirResourceType?: string
+  readonly fhirResourceSourceURL?: string
 }

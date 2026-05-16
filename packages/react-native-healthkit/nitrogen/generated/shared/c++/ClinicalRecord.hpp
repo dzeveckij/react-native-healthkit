@@ -57,6 +57,10 @@ namespace margelo::nitro::healthkit {
     std::string displayName     SWIFT_PRIVATE;
     std::optional<std::shared_ptr<AnyMap>> fhirRecord     SWIFT_PRIVATE;
     std::optional<std::shared_ptr<AnyMap>> fhirResource     SWIFT_PRIVATE;
+    std::optional<std::string> fhirResourceData     SWIFT_PRIVATE;
+    std::optional<std::string> fhirResourceIdentifier     SWIFT_PRIVATE;
+    std::optional<std::string> fhirResourceType     SWIFT_PRIVATE;
+    std::optional<std::string> fhirResourceSourceURL     SWIFT_PRIVATE;
     SampleType sampleType     SWIFT_PRIVATE;
     std::chrono::system_clock::time_point startDate     SWIFT_PRIVATE;
     std::chrono::system_clock::time_point endDate     SWIFT_PRIVATE;
@@ -68,7 +72,7 @@ namespace margelo::nitro::healthkit {
 
   public:
     ClinicalRecord() = default;
-    explicit ClinicalRecord(ClinicalTypeIdentifier clinicalType, std::string displayName, std::optional<std::shared_ptr<AnyMap>> fhirRecord, std::optional<std::shared_ptr<AnyMap>> fhirResource, SampleType sampleType, std::chrono::system_clock::time_point startDate, std::chrono::system_clock::time_point endDate, bool hasUndeterminedDuration, std::shared_ptr<AnyMap> metadata, std::string uuid, SourceRevision sourceRevision, std::optional<Device> device): clinicalType(clinicalType), displayName(displayName), fhirRecord(fhirRecord), fhirResource(fhirResource), sampleType(sampleType), startDate(startDate), endDate(endDate), hasUndeterminedDuration(hasUndeterminedDuration), metadata(metadata), uuid(uuid), sourceRevision(sourceRevision), device(device) {}
+    explicit ClinicalRecord(ClinicalTypeIdentifier clinicalType, std::string displayName, std::optional<std::shared_ptr<AnyMap>> fhirRecord, std::optional<std::shared_ptr<AnyMap>> fhirResource, std::optional<std::string> fhirResourceData, std::optional<std::string> fhirResourceIdentifier, std::optional<std::string> fhirResourceType, std::optional<std::string> fhirResourceSourceURL, SampleType sampleType, std::chrono::system_clock::time_point startDate, std::chrono::system_clock::time_point endDate, bool hasUndeterminedDuration, std::shared_ptr<AnyMap> metadata, std::string uuid, SourceRevision sourceRevision, std::optional<Device> device): clinicalType(clinicalType), displayName(displayName), fhirRecord(fhirRecord), fhirResource(fhirResource), fhirResourceData(fhirResourceData), fhirResourceIdentifier(fhirResourceIdentifier), fhirResourceType(fhirResourceType), fhirResourceSourceURL(fhirResourceSourceURL), sampleType(sampleType), startDate(startDate), endDate(endDate), hasUndeterminedDuration(hasUndeterminedDuration), metadata(metadata), uuid(uuid), sourceRevision(sourceRevision), device(device) {}
 
   public:
     friend bool operator==(const ClinicalRecord& lhs, const ClinicalRecord& rhs) = default;
@@ -88,6 +92,10 @@ namespace margelo::nitro {
         JSIConverter<std::string>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "displayName"))),
         JSIConverter<std::optional<std::shared_ptr<AnyMap>>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirRecord"))),
         JSIConverter<std::optional<std::shared_ptr<AnyMap>>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResource"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceData"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceIdentifier"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceType"))),
+        JSIConverter<std::optional<std::string>>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceSourceURL"))),
         JSIConverter<margelo::nitro::healthkit::SampleType>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "sampleType"))),
         JSIConverter<std::chrono::system_clock::time_point>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "startDate"))),
         JSIConverter<std::chrono::system_clock::time_point>::fromJSI(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "endDate"))),
@@ -104,6 +112,10 @@ namespace margelo::nitro {
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "displayName"), JSIConverter<std::string>::toJSI(runtime, arg.displayName));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "fhirRecord"), JSIConverter<std::optional<std::shared_ptr<AnyMap>>>::toJSI(runtime, arg.fhirRecord));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "fhirResource"), JSIConverter<std::optional<std::shared_ptr<AnyMap>>>::toJSI(runtime, arg.fhirResource));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceData"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.fhirResourceData));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceIdentifier"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.fhirResourceIdentifier));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceType"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.fhirResourceType));
+      obj.setProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceSourceURL"), JSIConverter<std::optional<std::string>>::toJSI(runtime, arg.fhirResourceSourceURL));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "sampleType"), JSIConverter<margelo::nitro::healthkit::SampleType>::toJSI(runtime, arg.sampleType));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "startDate"), JSIConverter<std::chrono::system_clock::time_point>::toJSI(runtime, arg.startDate));
       obj.setProperty(runtime, PropNameIDCache::get(runtime, "endDate"), JSIConverter<std::chrono::system_clock::time_point>::toJSI(runtime, arg.endDate));
@@ -126,6 +138,10 @@ namespace margelo::nitro {
       if (!JSIConverter<std::string>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "displayName")))) return false;
       if (!JSIConverter<std::optional<std::shared_ptr<AnyMap>>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirRecord")))) return false;
       if (!JSIConverter<std::optional<std::shared_ptr<AnyMap>>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResource")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceData")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceIdentifier")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceType")))) return false;
+      if (!JSIConverter<std::optional<std::string>>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "fhirResourceSourceURL")))) return false;
       if (!JSIConverter<margelo::nitro::healthkit::SampleType>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "sampleType")))) return false;
       if (!JSIConverter<std::chrono::system_clock::time_point>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "startDate")))) return false;
       if (!JSIConverter<std::chrono::system_clock::time_point>::canConvert(runtime, obj.getProperty(runtime, PropNameIDCache::get(runtime, "endDate")))) return false;

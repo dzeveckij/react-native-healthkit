@@ -57,6 +57,15 @@ private func serializeFHIRResource(_ resource: HKFHIRResource?) -> AnyMap? {
 }
 
 @available(iOS 12.0, *)
+private func serializeFHIRResourceData(_ resource: HKFHIRResource?) -> String? {
+  guard let resource else {
+    return nil
+  }
+
+  return String(data: resource.data, encoding: .utf8)
+}
+
+@available(iOS 12.0, *)
 private func serializeClinicalRecord(_ record: HKClinicalRecord) throws -> ClinicalRecord {
   guard let clinicalType = ClinicalTypeIdentifier(fromString: record.clinicalType.identifier) else {
     throw runtimeErrorWithPrefix(
@@ -64,12 +73,17 @@ private func serializeClinicalRecord(_ record: HKClinicalRecord) throws -> Clini
   }
 
   let fhirResource = serializeFHIRResource(record.fhirResource)
+  let rawFHIRResource = record.fhirResource
 
   return ClinicalRecord(
     clinicalType: clinicalType,
     displayName: record.displayName,
     fhirRecord: fhirResource,
     fhirResource: fhirResource,
+    fhirResourceData: serializeFHIRResourceData(rawFHIRResource),
+    fhirResourceIdentifier: rawFHIRResource?.identifier,
+    fhirResourceType: rawFHIRResource?.resourceType.rawValue,
+    fhirResourceSourceURL: rawFHIRResource?.sourceURL?.absoluteString,
     sampleType: serializeSampleType(record.sampleType),
     startDate: record.startDate,
     endDate: record.endDate,

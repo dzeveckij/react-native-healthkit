@@ -151,6 +151,10 @@ type _clinicalRecordHasFHIRPayload = Assert<
   Equal<ClinicalRecord['fhirResource'], AnyMap | undefined>
 >
 
+type _clinicalRecordHasRawFHIRPayload = Assert<
+  Equal<ClinicalRecord['fhirResourceData'], string | undefined>
+>
+
 type _clinicalRecordQueryUsesClinicalIdentifiers = Assert<
   Equal<Parameters<typeof queryClinicalRecords>[0], ClinicalTypeIdentifier>
 >

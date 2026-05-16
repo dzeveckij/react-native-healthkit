@@ -17,7 +17,8 @@ const {
  * @type {{
  *  NSHealthShareUsageDescription?: string | boolean,
  *  NSHealthUpdateUsageDescription?: string | boolean,
- *  NSHealthClinicalHealthRecordsShareUsageDescription?: string | boolean
+ *  NSHealthClinicalHealthRecordsShareUsageDescription?: string | boolean,
+ *  NSHealthRequiredReadAuthorizationTypeIdentifiers?: string[]
  * }}
  */
 
@@ -44,6 +45,18 @@ const withEntitlementsPlugin = (
     if (props?.background !== false) {
       config.modResults['com.apple.developer.healthkit.background-delivery'] =
         true
+    }
+
+    if (props?.NSHealthClinicalHealthRecordsShareUsageDescription) {
+      const existingAccess =
+        config.modResults['com.apple.developer.healthkit.access']
+      const healthkitAccess = Array.isArray(existingAccess)
+        ? existingAccess
+        : []
+
+      config.modResults['com.apple.developer.healthkit.access'] = [
+        ...new Set([...healthkitAccess, 'health-records']),
+      ]
     }
 
     return config
@@ -76,6 +89,11 @@ const withInfoPlistPlugin = (
         'string'
           ? props.NSHealthClinicalHealthRecordsShareUsageDescription
           : `${config.name ?? pkg.name} wants to read your clinical records`
+    }
+
+    if (props?.NSHealthRequiredReadAuthorizationTypeIdentifiers) {
+      config.modResults.NSHealthRequiredReadAuthorizationTypeIdentifiers =
+        props.NSHealthRequiredReadAuthorizationTypeIdentifiers
     }
 
     return config

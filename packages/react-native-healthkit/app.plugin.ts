@@ -15,15 +15,19 @@ type InfoPlistConfig = {
   NSHealthShareUsageDescription?: string | true
   NSHealthUpdateUsageDescription?: string | true
   NSHealthClinicalHealthRecordsShareUsageDescription?: string | true
+  NSHealthRequiredReadAuthorizationTypeIdentifiers?: string[]
 }
 
 type AppPluginConfig = InfoPlistConfig & {
   background?: BackgroundConfig
 }
 
-const withEntitlementsPlugin: ConfigPlugin<{
-  background?: BackgroundConfig
-}> = (config, props) => {
+const withEntitlementsPlugin: ConfigPlugin<
+  Pick<
+    AppPluginConfig,
+    'background' | 'NSHealthClinicalHealthRecordsShareUsageDescription'
+  >
+> = (config, props) => {
   return withEntitlementsPlist(config, (configPlist) => {
     configPlist.modResults['com.apple.developer.healthkit'] = true
 
@@ -33,6 +37,18 @@ const withEntitlementsPlugin: ConfigPlugin<{
       configPlist.modResults[
         'com.apple.developer.healthkit.background-delivery'
       ] = true
+    }
+
+    if (props?.NSHealthClinicalHealthRecordsShareUsageDescription) {
+      const existingAccess =
+        configPlist.modResults['com.apple.developer.healthkit.access']
+      const healthkitAccess = Array.isArray(existingAccess)
+        ? existingAccess
+        : []
+
+      configPlist.modResults['com.apple.developer.healthkit.access'] = [
+        ...new Set([...healthkitAccess, 'health-records']),
+      ]
     }
 
     return configPlist
@@ -59,6 +75,11 @@ const withInfoPlistPlugin: ConfigPlugin<InfoPlistConfig> = (config, props) => {
         'string'
           ? props.NSHealthClinicalHealthRecordsShareUsageDescription
           : `${config.name ?? pkg.name} wants to read your clinical records`
+    }
+
+    if (props?.NSHealthRequiredReadAuthorizationTypeIdentifiers) {
+      configPlist.modResults.NSHealthRequiredReadAuthorizationTypeIdentifiers =
+        props.NSHealthRequiredReadAuthorizationTypeIdentifiers
     }
 
     return configPlist
