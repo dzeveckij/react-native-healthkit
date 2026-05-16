@@ -35,6 +35,7 @@
         {
           "NSHealthShareUsageDescription": "Your own custom usage description",
           "NSHealthUpdateUsageDescription": "Your own custom usage description",
+          "NSHealthClinicalHealthRecordsShareUsageDescription": "Your own custom clinical records usage description",
           "background": true
         }
       ],

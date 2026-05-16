@@ -4,8 +4,10 @@ import type {
   CategoryTypeModuleTyped,
 } from './specs/CategoryTypeModule.nitro'
 import type { CharacteristicTypeModule } from './specs/CharacteristicTypeModule.nitro'
+import type { ClinicalRecordsModule } from './specs/ClinicalRecordsModule.nitro'
 import type { CoreModule } from './specs/CoreModule.nitro'
 import type { CorrelationTypeModule } from './specs/CorrelationTypeModule.nitro'
+import type { DocumentRecordsModule } from './specs/DocumentRecordsModule.nitro'
 import type { ElectrocardiogramModule } from './specs/ElectrocardiogramModule.nitro'
 import type { HeartbeatSeriesModule } from './specs/HeartbeatSeriesModule.nitro'
 import type { MedicationModule } from './specs/MedicationModule.nitro'
@@ -29,6 +31,11 @@ export const Characteristics =
     'CharacteristicTypeModule',
   )
 
+export const ClinicalRecords =
+  NitroModules.createHybridObject<ClinicalRecordsModule>(
+    'ClinicalRecordsModule',
+  )
+
 export const QuantityTypes =
   NitroModules.createHybridObject<QuantityTypeModule>(
     'QuantityTypeModule',
@@ -42,6 +49,11 @@ export const CategoryTypes =
 export const CorrelationTypes =
   NitroModules.createHybridObject<CorrelationTypeModule>(
     'CorrelationTypeModule',
+  )
+
+export const DocumentRecords =
+  NitroModules.createHybridObject<DocumentRecordsModule>(
+    'DocumentRecordsModule',
   )
 
 export const Electrocardiograms =

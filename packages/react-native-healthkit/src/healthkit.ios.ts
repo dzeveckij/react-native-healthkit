@@ -12,8 +12,10 @@ import useSubscribeToQuantitySamples from './hooks/useSubscribeToQuantitySamples
 import {
   CategoryTypes,
   Characteristics,
+  ClinicalRecords,
   Core,
   CorrelationTypes,
+  DocumentRecords,
   Electrocardiograms,
   HeartbeatSeries,
   Medication,
@@ -25,6 +27,10 @@ import type {
   CorrelationSampleTyped,
   QueryCorrelationSamplesWithAnchorResponseTyped,
 } from './types/CorrelationType'
+import type {
+  DocumentSample,
+  DocumentTypeIdentifier,
+} from './types/DocumentRecords'
 import type {
   ElectrocardiogramSamplesWithAnchorResponseTyped,
   ElectrocardiogramSampleTyped,
@@ -38,6 +44,7 @@ import type {
   MedicationDoseEventTyped,
 } from './types/Medication'
 import type { QuantityTypeIdentifier } from './types/QuantityTypeIdentifier'
+import type { QueryOptionsWithSortOrder } from './types/QueryOptions'
 import type {
   StateOfMindSamplesWithAnchorResponseTyped,
   StateOfMindSampleTyped,
@@ -326,6 +333,20 @@ export const queryCategorySamples =
   CategoryTypes.queryCategorySamples.bind(CategoryTypes)
 export const queryCategorySamplesWithAnchor =
   CategoryTypes.queryCategorySamplesWithAnchor.bind(CategoryTypes)
+export const supportsHealthRecords =
+  ClinicalRecords.supportsHealthRecords.bind(ClinicalRecords)
+export const supportsHealthRecordsAsync =
+  ClinicalRecords.supportsHealthRecordsAsync.bind(ClinicalRecords)
+export const queryClinicalRecords =
+  ClinicalRecords.queryClinicalRecords.bind(ClinicalRecords)
+export const queryClinicalRecordsWithAnchor =
+  ClinicalRecords.queryClinicalRecordsWithAnchor.bind(ClinicalRecords)
+export const queryDocumentSamples = DocumentRecords.queryDocumentSamples.bind(
+  DocumentRecords,
+) as (
+  typeIdentifier: DocumentTypeIdentifier,
+  options: QueryOptionsWithSortOrder,
+) => Promise<readonly DocumentSample[]>
 export const queryCorrelationSamples =
   CorrelationTypeBindings.queryCorrelationSamples
 export const queryCorrelationSamplesWithAnchor =
@@ -435,6 +456,11 @@ export default {
   isHealthDataAvailableAsync,
   queryCategorySamples,
   queryCategorySamplesWithAnchor,
+  supportsHealthRecords,
+  supportsHealthRecordsAsync,
+  queryClinicalRecords,
+  queryClinicalRecordsWithAnchor,
+  queryDocumentSamples,
   queryCorrelationSamples,
   queryCorrelationSamplesWithAnchor,
   queryHeartbeatSeriesSamples,
