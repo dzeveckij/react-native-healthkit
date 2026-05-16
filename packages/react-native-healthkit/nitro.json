@@ -18,6 +18,9 @@
     "CharacteristicTypeModule": {
       "swift": "CharacteristicTypeModule"
     },
+    "ClinicalRecordsModule": {
+      "swift": "ClinicalRecordsModule"
+    },
     "QuantityTypeModule": {
       "swift": "QuantityTypeModule"
     },
@@ -26,6 +29,9 @@
     },
     "CorrelationTypeModule": {
       "swift": "CorrelationTypeModule"
+    },
+    "DocumentRecordsModule": {
+      "swift": "DocumentRecordsModule"
     },
     "ElectrocardiogramModule": {
       "swift": "ElectrocardiogramModule"

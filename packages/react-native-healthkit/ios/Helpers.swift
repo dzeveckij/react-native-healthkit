@@ -212,6 +212,30 @@ func initializeCorrelationType(_ identifier: String) throws -> HKCorrelationType
     "Failed to initialize unrecognized correlationType with identifier \(identifier)")
 }
 
+func initializeClinicalType(_ identifier: String) throws -> HKClinicalType {
+  if #available(iOS 12.0, *) {
+    let identifier = HKClinicalTypeIdentifier(rawValue: identifier)
+
+    if let sampleType = HKObjectType.clinicalType(forIdentifier: identifier) {
+      return sampleType
+    }
+  }
+
+  throw runtimeErrorWithPrefix(
+    "Failed to initialize unrecognized clinicalType with identifier \(identifier)")
+}
+
+func initializeDocumentType(_ identifier: String) throws -> HKDocumentType {
+  let identifier = HKDocumentTypeIdentifier(rawValue: identifier)
+
+  if let sampleType = HKObjectType.documentType(forIdentifier: identifier) {
+    return sampleType
+  }
+
+  throw runtimeErrorWithPrefix(
+    "Failed to initialize unrecognized documentType with identifier \(identifier)")
+}
+
 func initializeSeriesType(_ identifier: String) throws -> HKSeriesType {
   if let seriesType = HKObjectType.seriesType(forIdentifier: identifier) {
     return seriesType
@@ -255,6 +279,14 @@ private func sampleTypeFromStringNullable(typeIdentifier: String) throws -> HKSa
 
   if typeIdentifier.starts(with: HKCorrelationTypeIdentifier_PREFIX) {
     return try initializeCorrelationType(typeIdentifier)
+  }
+
+  if typeIdentifier.starts(with: HKClinicalTypeIdentifier_PREFIX) {
+    return try initializeClinicalType(typeIdentifier)
+  }
+
+  if typeIdentifier.starts(with: HKDocumentTypeIdentifier_PREFIX) {
+    return try initializeDocumentType(typeIdentifier)
   }
 
   if typeIdentifier == HKWorkoutTypeIdentifier {
