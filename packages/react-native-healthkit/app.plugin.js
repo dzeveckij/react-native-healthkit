@@ -1,6 +1,7 @@
 const {
   withPlugins,
   createRunOncePlugin,
+  withAppDelegate,
   withEntitlementsPlist,
   withInfoPlist,
 } = require('@expo/config-plugins')
@@ -15,7 +16,8 @@ const {
  * @typedef InfoPlistConfig
  * @type {{
  *  NSHealthShareUsageDescription?: string | boolean,
- *  NSHealthUpdateUsageDescription?: string | boolean
+ *  NSHealthUpdateUsageDescription?: string | boolean,
+ *  NSHealthClinicalHealthRecordsShareUsageDescription?: string | boolean
  * }}
  */
 
@@ -59,19 +61,78 @@ const withInfoPlistPlugin = (
 ) =>
   withInfoPlist(config, (config) => {
     config.modResults.NSHealthShareUsageDescription =
-      typeof props.NSHealthShareUsageDescription === 'string'
+      typeof props?.NSHealthShareUsageDescription === 'string'
         ? props.NSHealthShareUsageDescription
-        : `${config.name} wants to read your health data`
+        : `${config.name ?? pkg.name} wants to read your health data`
 
     config.modResults.NSHealthUpdateUsageDescription =
-      typeof props.NSHealthUpdateUsageDescription === 'string'
+      typeof props?.NSHealthUpdateUsageDescription === 'string'
         ? props.NSHealthUpdateUsageDescription
-        : `${config.name} wants to update your health data`
+        : `${config.name ?? pkg.name} wants to update your health data`
+
+    if (props?.NSHealthClinicalHealthRecordsShareUsageDescription) {
+      config.modResults.NSHealthClinicalHealthRecordsShareUsageDescription =
+        typeof props.NSHealthClinicalHealthRecordsShareUsageDescription ===
+        'string'
+          ? props.NSHealthClinicalHealthRecordsShareUsageDescription
+          : `${config.name ?? pkg.name} wants to read your clinical records`
+    }
 
     return config
   })
 
 const pkg = require('./package.json')
+
+/**
+ * @type {ConfigPlugin<{background: boolean}>}
+ */
+const withAppDelegatePlugin = (
+  config,
+  /**
+   * @type {{background: boolean} | undefined}
+   * */
+  props,
+) => {
+  if (props?.background === false) {
+    return config
+  }
+
+  return withAppDelegate(config, (configDelegate) => {
+    const contents = configDelegate.modResults.contents
+
+    if (!contents.includes('import HealthKit')) {
+      configDelegate.modResults.contents =
+        configDelegate.modResults.contents.replace(
+          /^(import .+\n)/m,
+          '$1import HealthKit\n',
+        )
+    }
+
+    const setupCall =
+      '    BackgroundDeliveryManager.shared.setupBackgroundObservers()\n'
+
+    if (
+      !configDelegate.modResults.contents.includes('BackgroundDeliveryManager')
+    ) {
+      const bindCall = '    bindReactNativeFactory(factory)\n'
+      if (configDelegate.modResults.contents.includes(bindCall)) {
+        configDelegate.modResults.contents =
+          configDelegate.modResults.contents.replace(
+            bindCall,
+            `${bindCall}${setupCall}`,
+          )
+      } else {
+        configDelegate.modResults.contents =
+          configDelegate.modResults.contents.replace(
+            /(\n\s*return super\.application\(application, didFinishLaunchingWithOptions: launchOptions\))/,
+            `\n${setupCall}$1`,
+          )
+      }
+    }
+
+    return configDelegate
+  })
+}
 
 /**
  * @type {ConfigPlugin<AppPluginConfig>}
@@ -80,6 +141,7 @@ const healthkitAppPlugin = (config, props) =>
   withPlugins(config, [
     [withEntitlementsPlugin, props],
     [withInfoPlistPlugin, props],
+    [withAppDelegatePlugin, props],
   ])
 
 /**
