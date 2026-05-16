@@ -43,6 +43,7 @@ this will give you defaults that make the app build without any further configur
       ["@kingstinct/react-native-healthkit", {
         "NSHealthShareUsageDescription": "Your own custom usage description",
         "NSHealthUpdateUsageDescription": "Your own custom usage description",
+        "NSHealthClinicalHealthRecordsShareUsageDescription": "Your own custom clinical records usage description",
         "background": true
       }]
     ]
@@ -54,7 +55,7 @@ this will give you defaults that make the app build without any further configur
 ### Native or Expo Bare Workflow
 1. `yarn add @kingstinct/react-native-healthkit react-native-nitro-modules`
 2. `npx pod-install`
-3. Set `NSHealthUpdateUsageDescription` and `NSHealthShareUsageDescription` in your `Info.plist` 
+3. Set `NSHealthUpdateUsageDescription` and `NSHealthShareUsageDescription` in your `Info.plist`. If you read clinical records, also set `NSHealthClinicalHealthRecordsShareUsageDescription`.
 4. Enable the HealthKit capability for the project in Xcode.
 5. Since this package is using Swift you might also need to add a bridging header in your project if you haven't already, you can [find more about that in the official React Native docs](https://reactnative.dev/docs/native-modules-ios#exporting-swift)
 
@@ -172,7 +173,41 @@ We're striving to do as straight a mapping as possible to the Native Libraries. 
 
 ## Clinical Records
 
-For accessing Clinical Records use old version (3.x) or use specific branch "including-clinical-records". The reason is we cannot refer to this code natively in apps without getting approval from Apple, this could probably be solved by the config plugin but we haven't had time to look into it yet.
+Clinical records can be queried on iOS 12 and later when the device supports health records and the app has Apple's required Health Records entitlement.
+
+```TypeScript
+import {
+  queryClinicalRecords,
+  queryDocumentSamples,
+  requestAuthorization,
+  supportsHealthRecords,
+} from '@kingstinct/react-native-healthkit';
+
+if (supportsHealthRecords()) {
+  await requestAuthorization({
+    toRead: ['HKClinicalTypeIdentifierLabResultRecord'],
+  });
+
+  const records = await queryClinicalRecords(
+    'HKClinicalTypeIdentifierLabResultRecord',
+    { limit: 20 },
+  );
+
+  console.log(records[0]?.fhirResource);
+
+  const documents = await queryDocumentSamples('HKDocumentTypeIdentifierCDA', {
+    limit: 20,
+  });
+
+  console.log(documents[0]?.documentData);
+}
+```
+
+`useMostRecentClinicalRecord` and `useMostRecentDocumentSample` are also available for subscribing to the latest record or document of a given type.
+
+`queryClinicalSamples` and `useMostRecentClinicalSample` are aliases for the clinical record APIs.
+
+Clinical records are read-only and expose HealthKit's FHIR resource as JSON when HealthKit provides one. CDA documents are exposed as Base64 document data. Apps using these APIs must include `NSHealthClinicalHealthRecordsShareUsageDescription` in `Info.plist` and the `com.apple.developer.healthkit.access` entitlement with the `health-records` value; the Expo config plugin adds both when you pass the clinical records usage description option.
 
 ## Android alternatives
 
@@ -191,4 +226,3 @@ At Kingstinct we're also able to provide enterprise-grade support for this packa
 ## License
 
 MIT
-

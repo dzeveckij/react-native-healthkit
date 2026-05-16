@@ -179,6 +179,17 @@ import HealthKit
       let typeId = HKCorrelationTypeIdentifier(rawValue: identifier)
       return HKSampleType.correlationType(forIdentifier: typeId)
     }
+    if identifier.starts(with: "HKClinicalTypeIdentifier") {
+      if #available(iOS 12.0, *) {
+        let typeId = HKClinicalTypeIdentifier(rawValue: identifier)
+        return HKObjectType.clinicalType(forIdentifier: typeId)
+      }
+      return nil
+    }
+    if identifier.starts(with: "HKDocumentTypeIdentifier") {
+      let typeId = HKDocumentTypeIdentifier(rawValue: identifier)
+      return HKObjectType.documentType(forIdentifier: typeId)
+    }
     if identifier == "HKAudiogramSampleType" {
       return HKObjectType.audiogramSampleType()
     }

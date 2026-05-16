@@ -329,6 +329,31 @@ export function saveCategorySample<T extends CategoryTypeIdentifierWriteable>(
   return Promise.resolve(undefined)
 }
 
+export const supportsHealthRecords = UnavailableFnFromModule(
+  'supportsHealthRecords',
+  false,
+)
+export const supportsHealthRecordsAsync = UnavailableFnFromModule(
+  'supportsHealthRecordsAsync',
+  Promise.resolve(false),
+)
+export const queryClinicalRecords = UnavailableFnFromModule(
+  'queryClinicalRecords',
+  Promise.resolve([]),
+)
+export const queryClinicalRecordsWithAnchor = UnavailableFnFromModule(
+  'queryClinicalRecordsWithAnchor',
+  Promise.resolve({
+    clinicalRecords: [],
+    deletedSamples: [],
+    newAnchor: '',
+  }),
+)
+export const queryDocumentSamples = UnavailableFnFromModule(
+  'queryDocumentSamples',
+  Promise.resolve([]),
+)
+
 // CorrelationTypeModule functions
 export const queryCorrelationSamples = UnavailableFnFromModule(
   'queryCorrelationSamples',
@@ -607,6 +632,11 @@ const HealthkitModule = {
   isHealthDataAvailableAsync,
   queryCategorySamples,
   queryCategorySamplesWithAnchor,
+  supportsHealthRecords,
+  supportsHealthRecordsAsync,
+  queryClinicalRecords,
+  queryClinicalRecordsWithAnchor,
+  queryDocumentSamples,
   queryCorrelationSamples,
   queryHeartbeatSeriesSamples,
   queryHeartbeatSeriesSamplesWithAnchor,
