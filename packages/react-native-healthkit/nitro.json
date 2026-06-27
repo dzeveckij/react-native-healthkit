@@ -30,9 +30,6 @@
     "CorrelationTypeModule": {
       "swift": "CorrelationTypeModule"
     },
-    "DocumentRecordsModule": {
-      "swift": "DocumentRecordsModule"
-    },
     "ElectrocardiogramModule": {
       "swift": "ElectrocardiogramModule"
     },

@@ -13,7 +13,6 @@
 #include "HybridClinicalRecordsModuleSpecSwift.hpp"
 #include "HybridCoreModuleSpecSwift.hpp"
 #include "HybridCorrelationTypeModuleSpecSwift.hpp"
-#include "HybridDocumentRecordsModuleSpecSwift.hpp"
 #include "HybridElectrocardiogramModuleSpecSwift.hpp"
 #include "HybridHeartbeatSeriesModuleSpecSwift.hpp"
 #include "HybridMedicationModuleSpecSwift.hpp"
@@ -312,30 +311,6 @@ namespace margelo::nitro::healthkit::bridge::swift {
     }
     #endif
     ReactNativeHealthkit::HybridCorrelationTypeModuleSpec_cxx& swiftPart = swiftWrapper->getSwiftPart();
-    return swiftPart.toUnsafe();
-  }
-  
-  // pragma MARK: std::function<void(const std::vector<DocumentSample>& /* result */)>
-  Func_void_std__vector_DocumentSample_ create_Func_void_std__vector_DocumentSample_(void* NON_NULL swiftClosureWrapper) noexcept {
-    auto swiftClosure = ReactNativeHealthkit::Func_void_std__vector_DocumentSample_::fromUnsafe(swiftClosureWrapper);
-    return [swiftClosure = std::move(swiftClosure)](const std::vector<DocumentSample>& result) mutable -> void {
-      swiftClosure.call(result);
-    };
-  }
-  
-  // pragma MARK: std::shared_ptr<HybridDocumentRecordsModuleSpec>
-  std::shared_ptr<HybridDocumentRecordsModuleSpec> create_std__shared_ptr_HybridDocumentRecordsModuleSpec_(void* NON_NULL swiftUnsafePointer) noexcept {
-    ReactNativeHealthkit::HybridDocumentRecordsModuleSpec_cxx swiftPart = ReactNativeHealthkit::HybridDocumentRecordsModuleSpec_cxx::fromUnsafe(swiftUnsafePointer);
-    return std::make_shared<margelo::nitro::healthkit::HybridDocumentRecordsModuleSpecSwift>(swiftPart);
-  }
-  void* NON_NULL get_std__shared_ptr_HybridDocumentRecordsModuleSpec_(std__shared_ptr_HybridDocumentRecordsModuleSpec_ cppType) {
-    std::shared_ptr<margelo::nitro::healthkit::HybridDocumentRecordsModuleSpecSwift> swiftWrapper = std::dynamic_pointer_cast<margelo::nitro::healthkit::HybridDocumentRecordsModuleSpecSwift>(cppType);
-    #ifdef NITRO_DEBUG
-    if (swiftWrapper == nullptr) [[unlikely]] {
-      throw std::runtime_error("Class \"HybridDocumentRecordsModuleSpec\" is not implemented in Swift!");
-    }
-    #endif
-    ReactNativeHealthkit::HybridDocumentRecordsModuleSpec_cxx& swiftPart = swiftWrapper->getSwiftPart();
     return swiftPart.toUnsafe();
   }
   

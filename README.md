@@ -178,7 +178,6 @@ Clinical records can be queried on iOS 12 and later when the device supports hea
 ```TypeScript
 import {
   queryClinicalRecords,
-  queryDocumentSamples,
   requestAuthorization,
   supportsHealthRecords,
 } from '@kingstinct/react-native-healthkit';
@@ -194,20 +193,10 @@ if (supportsHealthRecords()) {
   );
 
   console.log(records[0]?.fhirResource);
-
-  const documents = await queryDocumentSamples('HKDocumentTypeIdentifierCDA', {
-    limit: 20,
-  });
-
-  console.log(documents[0]?.documentData);
 }
 ```
 
-`useMostRecentClinicalRecord` and `useMostRecentDocumentSample` are also available for subscribing to the latest record or document of a given type.
-
-`queryClinicalSamples` and `useMostRecentClinicalSample` are aliases for the clinical record APIs.
-
-Clinical records are read-only and expose HealthKit's FHIR resource as JSON when HealthKit provides one. CDA documents are exposed as Base64 document data. Apps using these APIs must include `NSHealthClinicalHealthRecordsShareUsageDescription` in `Info.plist` and the `com.apple.developer.healthkit.access` entitlement with the `health-records` value; the Expo config plugin adds both when you pass the clinical records usage description option.
+Clinical records are read-only and expose HealthKit's FHIR resource as JSON when HealthKit provides one. Apps using these APIs must include `NSHealthClinicalHealthRecordsShareUsageDescription` in `Info.plist` and the `com.apple.developer.healthkit.access` entitlement with the `health-records` value; the Expo config plugin adds both when you pass the clinical records usage description option.
 
 ## Android alternatives
 

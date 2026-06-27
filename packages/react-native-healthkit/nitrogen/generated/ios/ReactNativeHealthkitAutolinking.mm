@@ -17,7 +17,6 @@
 #include "HybridQuantityTypeModuleSpecSwift.hpp"
 #include "HybridCategoryTypeModuleSpecSwift.hpp"
 #include "HybridCorrelationTypeModuleSpecSwift.hpp"
-#include "HybridDocumentRecordsModuleSpecSwift.hpp"
 #include "HybridElectrocardiogramModuleSpecSwift.hpp"
 #include "HybridHeartbeatSeriesModuleSpecSwift.hpp"
 #include "HybridStateOfMindModuleSpecSwift.hpp"
@@ -78,13 +77,6 @@
     "CorrelationTypeModule",
     []() -> std::shared_ptr<HybridObject> {
       std::shared_ptr<HybridCorrelationTypeModuleSpec> hybridObject = ReactNativeHealthkit::ReactNativeHealthkitAutolinking::createCorrelationTypeModule();
-      return hybridObject;
-    }
-  );
-  HybridObjectRegistry::registerHybridObjectConstructor(
-    "DocumentRecordsModule",
-    []() -> std::shared_ptr<HybridObject> {
-      std::shared_ptr<HybridDocumentRecordsModuleSpec> hybridObject = ReactNativeHealthkit::ReactNativeHealthkitAutolinking::createDocumentRecordsModule();
       return hybridObject;
     }
   );

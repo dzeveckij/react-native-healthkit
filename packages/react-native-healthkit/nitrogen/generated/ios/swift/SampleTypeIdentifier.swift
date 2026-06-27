@@ -175,8 +175,6 @@ public extension SampleTypeIdentifier {
         self = .hkcorrelationtypeidentifierbloodpressure
       case "HKCorrelationTypeIdentifierFood":
         self = .hkcorrelationtypeidentifierfood
-      case "HKDocumentTypeIdentifierCDA":
-        self = .hkdocumenttypeidentifiercda
       case "HKQuantityTypeIdentifierAppleExerciseTime":
         self = .hkquantitytypeidentifierappleexercisetime
       case "HKQuantityTypeIdentifierAppleStandTime":
@@ -597,8 +595,6 @@ public extension SampleTypeIdentifier {
         return "HKCorrelationTypeIdentifierBloodPressure"
       case .hkcorrelationtypeidentifierfood:
         return "HKCorrelationTypeIdentifierFood"
-      case .hkdocumenttypeidentifiercda:
-        return "HKDocumentTypeIdentifierCDA"
       case .hkquantitytypeidentifierappleexercisetime:
         return "HKQuantityTypeIdentifierAppleExerciseTime"
       case .hkquantitytypeidentifierapplestandtime:

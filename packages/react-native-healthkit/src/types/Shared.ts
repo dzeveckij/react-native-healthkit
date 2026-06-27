@@ -22,7 +22,6 @@ import type {
 } from './Constants'
 import type { CorrelationTypeIdentifier } from './CorrelationType'
 import type { Device } from './Device'
-import type { DocumentTypeIdentifier } from './DocumentRecords'
 import type {
   QuantityTypeIdentifier,
   QuantityTypeIdentifierWriteable,
@@ -47,7 +46,6 @@ export type SampleTypeIdentifier =
   | CategoryTypeIdentifier
   | ClinicalTypeIdentifier
   | CorrelationTypeIdentifier
-  | DocumentTypeIdentifier
   | QuantityTypeIdentifier
   | typeof StateOfMindTypeIdentifier
   | typeof AudiogramTypeIdentifier

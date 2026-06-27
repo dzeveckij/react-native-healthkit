@@ -44,8 +44,6 @@ namespace margelo::nitro::healthkit { struct DateFilter; }
 namespace margelo::nitro::healthkit { struct DeletedSample; }
 // Forward declaration of `Device` to properly resolve imports.
 namespace margelo::nitro::healthkit { struct Device; }
-// Forward declaration of `DocumentSample` to properly resolve imports.
-namespace margelo::nitro::healthkit { struct DocumentSample; }
 // Forward declaration of `ElectrocardiogramClassification` to properly resolve imports.
 namespace margelo::nitro::healthkit { enum class ElectrocardiogramClassification; }
 // Forward declaration of `ElectrocardiogramLead` to properly resolve imports.
@@ -86,8 +84,6 @@ namespace margelo::nitro::healthkit { class HybridClinicalRecordsModuleSpec; }
 namespace margelo::nitro::healthkit { class HybridCoreModuleSpec; }
 // Forward declaration of `HybridCorrelationTypeModuleSpec` to properly resolve imports.
 namespace margelo::nitro::healthkit { class HybridCorrelationTypeModuleSpec; }
-// Forward declaration of `HybridDocumentRecordsModuleSpec` to properly resolve imports.
-namespace margelo::nitro::healthkit { class HybridDocumentRecordsModuleSpec; }
 // Forward declaration of `HybridElectrocardiogramModuleSpec` to properly resolve imports.
 namespace margelo::nitro::healthkit { class HybridElectrocardiogramModuleSpec; }
 // Forward declaration of `HybridHeartbeatSeriesModuleSpec` to properly resolve imports.
@@ -210,8 +206,6 @@ namespace ReactNativeHealthkit { class HybridClinicalRecordsModuleSpec_cxx; }
 namespace ReactNativeHealthkit { class HybridCoreModuleSpec_cxx; }
 // Forward declaration of `HybridCorrelationTypeModuleSpec_cxx` to properly resolve imports.
 namespace ReactNativeHealthkit { class HybridCorrelationTypeModuleSpec_cxx; }
-// Forward declaration of `HybridDocumentRecordsModuleSpec_cxx` to properly resolve imports.
-namespace ReactNativeHealthkit { class HybridDocumentRecordsModuleSpec_cxx; }
 // Forward declaration of `HybridElectrocardiogramModuleSpec_cxx` to properly resolve imports.
 namespace ReactNativeHealthkit { class HybridElectrocardiogramModuleSpec_cxx; }
 // Forward declaration of `HybridHeartbeatSeriesModuleSpec_cxx` to properly resolve imports.
@@ -248,7 +242,6 @@ namespace ReactNativeHealthkit { class HybridWorkoutsModuleSpec_cxx; }
 #include "DateFilter.hpp"
 #include "DeletedSample.hpp"
 #include "Device.hpp"
-#include "DocumentSample.hpp"
 #include "ElectrocardiogramClassification.hpp"
 #include "ElectrocardiogramLead.hpp"
 #include "ElectrocardiogramSample.hpp"
@@ -269,7 +262,6 @@ namespace ReactNativeHealthkit { class HybridWorkoutsModuleSpec_cxx; }
 #include "HybridClinicalRecordsModuleSpec.hpp"
 #include "HybridCoreModuleSpec.hpp"
 #include "HybridCorrelationTypeModuleSpec.hpp"
-#include "HybridDocumentRecordsModuleSpec.hpp"
 #include "HybridElectrocardiogramModuleSpec.hpp"
 #include "HybridHeartbeatSeriesModuleSpec.hpp"
 #include "HybridMedicationModuleSpec.hpp"
@@ -1982,72 +1974,6 @@ namespace margelo::nitro::healthkit::bridge::swift {
   }
   inline Result_std__shared_ptr_Promise_QueryCorrelationSamplesWithAnchorResponse___ create_Result_std__shared_ptr_Promise_QueryCorrelationSamplesWithAnchorResponse___(const std::exception_ptr& error) noexcept {
     return Result<std::shared_ptr<Promise<QueryCorrelationSamplesWithAnchorResponse>>>::withError(error);
-  }
-  
-  // pragma MARK: std::vector<DocumentSample>
-  /**
-   * Specialized version of `std::vector<DocumentSample>`.
-   */
-  using std__vector_DocumentSample_ = std::vector<DocumentSample>;
-  inline std::vector<DocumentSample> create_std__vector_DocumentSample_(size_t size) noexcept {
-    std::vector<DocumentSample> vector;
-    vector.reserve(size);
-    return vector;
-  }
-  
-  // pragma MARK: std::shared_ptr<Promise<std::vector<DocumentSample>>>
-  /**
-   * Specialized version of `std::shared_ptr<Promise<std::vector<DocumentSample>>>`.
-   */
-  using std__shared_ptr_Promise_std__vector_DocumentSample___ = std::shared_ptr<Promise<std::vector<DocumentSample>>>;
-  inline std::shared_ptr<Promise<std::vector<DocumentSample>>> create_std__shared_ptr_Promise_std__vector_DocumentSample___() noexcept {
-    return Promise<std::vector<DocumentSample>>::create();
-  }
-  inline PromiseHolder<std::vector<DocumentSample>> wrap_std__shared_ptr_Promise_std__vector_DocumentSample___(std::shared_ptr<Promise<std::vector<DocumentSample>>> promise) noexcept {
-    return PromiseHolder<std::vector<DocumentSample>>(std::move(promise));
-  }
-  
-  // pragma MARK: std::function<void(const std::vector<DocumentSample>& /* result */)>
-  /**
-   * Specialized version of `std::function<void(const std::vector<DocumentSample>&)>`.
-   */
-  using Func_void_std__vector_DocumentSample_ = std::function<void(const std::vector<DocumentSample>& /* result */)>;
-  /**
-   * Wrapper class for a `std::function<void(const std::vector<DocumentSample>& / * result * /)>`, this can be used from Swift.
-   */
-  class Func_void_std__vector_DocumentSample__Wrapper final {
-  public:
-    explicit Func_void_std__vector_DocumentSample__Wrapper(std::function<void(const std::vector<DocumentSample>& /* result */)>&& func): _function(std::make_unique<std::function<void(const std::vector<DocumentSample>& /* result */)>>(std::move(func))) {}
-    inline void call(std::vector<DocumentSample> result) const noexcept {
-      _function->operator()(result);
-    }
-  private:
-    std::unique_ptr<std::function<void(const std::vector<DocumentSample>& /* result */)>> _function;
-  } SWIFT_NONCOPYABLE;
-  Func_void_std__vector_DocumentSample_ create_Func_void_std__vector_DocumentSample_(void* NON_NULL swiftClosureWrapper) noexcept;
-  inline Func_void_std__vector_DocumentSample__Wrapper wrap_Func_void_std__vector_DocumentSample_(Func_void_std__vector_DocumentSample_ value) noexcept {
-    return Func_void_std__vector_DocumentSample__Wrapper(std::move(value));
-  }
-  
-  // pragma MARK: std::shared_ptr<HybridDocumentRecordsModuleSpec>
-  /**
-   * Specialized version of `std::shared_ptr<HybridDocumentRecordsModuleSpec>`.
-   */
-  using std__shared_ptr_HybridDocumentRecordsModuleSpec_ = std::shared_ptr<HybridDocumentRecordsModuleSpec>;
-  std::shared_ptr<HybridDocumentRecordsModuleSpec> create_std__shared_ptr_HybridDocumentRecordsModuleSpec_(void* NON_NULL swiftUnsafePointer) noexcept;
-  void* NON_NULL get_std__shared_ptr_HybridDocumentRecordsModuleSpec_(std__shared_ptr_HybridDocumentRecordsModuleSpec_ cppType);
-  
-  // pragma MARK: std::weak_ptr<HybridDocumentRecordsModuleSpec>
-  using std__weak_ptr_HybridDocumentRecordsModuleSpec_ = std::weak_ptr<HybridDocumentRecordsModuleSpec>;
-  inline std__weak_ptr_HybridDocumentRecordsModuleSpec_ weakify_std__shared_ptr_HybridDocumentRecordsModuleSpec_(const std::shared_ptr<HybridDocumentRecordsModuleSpec>& strong) noexcept { return strong; }
-  
-  // pragma MARK: Result<std::shared_ptr<Promise<std::vector<DocumentSample>>>>
-  using Result_std__shared_ptr_Promise_std__vector_DocumentSample____ = Result<std::shared_ptr<Promise<std::vector<DocumentSample>>>>;
-  inline Result_std__shared_ptr_Promise_std__vector_DocumentSample____ create_Result_std__shared_ptr_Promise_std__vector_DocumentSample____(const std::shared_ptr<Promise<std::vector<DocumentSample>>>& value) noexcept {
-    return Result<std::shared_ptr<Promise<std::vector<DocumentSample>>>>::withValue(value);
-  }
-  inline Result_std__shared_ptr_Promise_std__vector_DocumentSample____ create_Result_std__shared_ptr_Promise_std__vector_DocumentSample____(const std::exception_ptr& error) noexcept {
-    return Result<std::shared_ptr<Promise<std::vector<DocumentSample>>>>::withError(error);
   }
   
   // pragma MARK: std::optional<double>

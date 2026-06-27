@@ -349,10 +349,6 @@ export const queryClinicalRecordsWithAnchor = UnavailableFnFromModule(
     newAnchor: '',
   }),
 )
-export const queryDocumentSamples = UnavailableFnFromModule(
-  'queryDocumentSamples',
-  Promise.resolve([]),
-)
 
 // CorrelationTypeModule functions
 export const queryCorrelationSamples = UnavailableFnFromModule(
@@ -636,7 +632,6 @@ const HealthkitModule = {
   supportsHealthRecordsAsync,
   queryClinicalRecords,
   queryClinicalRecordsWithAnchor,
-  queryDocumentSamples,
   queryCorrelationSamples,
   queryHeartbeatSeriesSamples,
   queryHeartbeatSeriesSamplesWithAnchor,

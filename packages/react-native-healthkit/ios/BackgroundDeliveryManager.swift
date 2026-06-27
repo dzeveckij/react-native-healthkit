@@ -186,10 +186,6 @@ import HealthKit
       }
       return nil
     }
-    if identifier.starts(with: "HKDocumentTypeIdentifier") {
-      let typeId = HKDocumentTypeIdentifier(rawValue: identifier)
-      return HKObjectType.documentType(forIdentifier: typeId)
-    }
     if identifier == "HKAudiogramSampleType" {
       return HKObjectType.audiogramSampleType()
     }

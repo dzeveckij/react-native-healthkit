@@ -96,18 +96,6 @@ public final class ReactNativeHealthkitAutolinking {
     return CorrelationTypeModule.self is any RecyclableView.Type
   }
   
-  public static func createDocumentRecordsModule() -> bridge.std__shared_ptr_HybridDocumentRecordsModuleSpec_ {
-    let hybridObject = DocumentRecordsModule()
-    return { () -> bridge.std__shared_ptr_HybridDocumentRecordsModuleSpec_ in
-      let __cxxWrapped = hybridObject.getCxxWrapper()
-      return __cxxWrapped.getCxxPart()
-    }()
-  }
-  
-  public static func isDocumentRecordsModuleRecyclable() -> Bool {
-    return DocumentRecordsModule.self is any RecyclableView.Type
-  }
-  
   public static func createElectrocardiogramModule() -> bridge.std__shared_ptr_HybridElectrocardiogramModuleSpec_ {
     let hybridObject = ElectrocardiogramModule()
     return { () -> bridge.std__shared_ptr_HybridElectrocardiogramModuleSpec_ in

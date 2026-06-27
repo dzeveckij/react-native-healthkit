@@ -48,8 +48,6 @@ namespace margelo::nitro::healthkit { struct DateFilter; }
 namespace margelo::nitro::healthkit { struct DeletedSample; }
 // Forward declaration of `Device` to properly resolve imports.
 namespace margelo::nitro::healthkit { struct Device; }
-// Forward declaration of `DocumentSample` to properly resolve imports.
-namespace margelo::nitro::healthkit { struct DocumentSample; }
 // Forward declaration of `ECGQueryOptionsWithAnchor` to properly resolve imports.
 namespace margelo::nitro::healthkit { struct ECGQueryOptionsWithAnchor; }
 // Forward declaration of `ECGQueryOptionsWithSortOrder` to properly resolve imports.
@@ -94,8 +92,6 @@ namespace margelo::nitro::healthkit { class HybridClinicalRecordsModuleSpec; }
 namespace margelo::nitro::healthkit { class HybridCoreModuleSpec; }
 // Forward declaration of `HybridCorrelationTypeModuleSpec` to properly resolve imports.
 namespace margelo::nitro::healthkit { class HybridCorrelationTypeModuleSpec; }
-// Forward declaration of `HybridDocumentRecordsModuleSpec` to properly resolve imports.
-namespace margelo::nitro::healthkit { class HybridDocumentRecordsModuleSpec; }
 // Forward declaration of `HybridElectrocardiogramModuleSpec` to properly resolve imports.
 namespace margelo::nitro::healthkit { class HybridElectrocardiogramModuleSpec; }
 // Forward declaration of `HybridHeartbeatSeriesModuleSpec` to properly resolve imports.
@@ -250,7 +246,6 @@ namespace margelo::nitro::healthkit { struct WorkoutTotals; }
 #include "DateFilter.hpp"
 #include "DeletedSample.hpp"
 #include "Device.hpp"
-#include "DocumentSample.hpp"
 #include "ECGQueryOptionsWithAnchor.hpp"
 #include "ECGQueryOptionsWithSortOrder.hpp"
 #include "ElectrocardiogramClassification.hpp"
@@ -273,7 +268,6 @@ namespace margelo::nitro::healthkit { struct WorkoutTotals; }
 #include "HybridClinicalRecordsModuleSpec.hpp"
 #include "HybridCoreModuleSpec.hpp"
 #include "HybridCorrelationTypeModuleSpec.hpp"
-#include "HybridDocumentRecordsModuleSpec.hpp"
 #include "HybridElectrocardiogramModuleSpec.hpp"
 #include "HybridHeartbeatSeriesModuleSpec.hpp"
 #include "HybridMedicationModuleSpec.hpp"
@@ -373,8 +367,6 @@ namespace ReactNativeHealthkit { class HybridClinicalRecordsModuleSpec_cxx; }
 namespace ReactNativeHealthkit { class HybridCoreModuleSpec_cxx; }
 // Forward declaration of `HybridCorrelationTypeModuleSpec_cxx` to properly resolve imports.
 namespace ReactNativeHealthkit { class HybridCorrelationTypeModuleSpec_cxx; }
-// Forward declaration of `HybridDocumentRecordsModuleSpec_cxx` to properly resolve imports.
-namespace ReactNativeHealthkit { class HybridDocumentRecordsModuleSpec_cxx; }
 // Forward declaration of `HybridElectrocardiogramModuleSpec_cxx` to properly resolve imports.
 namespace ReactNativeHealthkit { class HybridElectrocardiogramModuleSpec_cxx; }
 // Forward declaration of `HybridHeartbeatSeriesModuleSpec_cxx` to properly resolve imports.
